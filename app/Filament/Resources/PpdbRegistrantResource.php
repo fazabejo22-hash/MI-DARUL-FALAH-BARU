@@ -150,7 +150,7 @@ class PpdbRegistrantResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    // Bulk delete removed to prevent accidental mass deletion of applicant history
                 ]),
             ]);
     }
