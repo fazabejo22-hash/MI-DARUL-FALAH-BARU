@@ -18,6 +18,7 @@ class Announcement extends Model
         'end_at',
         'is_active',
         'is_pinned',
+        'priority',
         'created_by',
     ];
 
@@ -26,6 +27,7 @@ class Announcement extends Model
         'end_at' => 'datetime',
         'is_active' => 'boolean',
         'is_pinned' => 'boolean',
+        'priority' => 'integer',
     ];
 
     public function creator(): BelongsTo

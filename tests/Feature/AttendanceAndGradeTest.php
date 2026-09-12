@@ -28,7 +28,6 @@ class AttendanceAndGradeTest extends TestCase
     {
         $academicYear = AcademicYear::create([
             'name' => '2026/2027',
-            'semester' => 'Ganjil',
             'is_active' => true,
         ]);
 
@@ -66,7 +65,6 @@ class AttendanceAndGradeTest extends TestCase
     {
         $academicYear = AcademicYear::create([
             'name' => '2026/2027',
-            'semester' => 'Ganjil',
             'is_active' => true,
         ]);
 

@@ -16,6 +16,7 @@ class Achievement extends Model
         'achievement_date',
         'level',
         'recipient_name',
+        'category',
         'image',
         'is_published',
     ];
