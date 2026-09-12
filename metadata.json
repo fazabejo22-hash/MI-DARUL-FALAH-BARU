@@ -1,6 +1,6 @@
 {
   "name": "Remix Sistem Informasi Terpadu MI Darul Falah",
-  "description": "Sistem Informasi Terpadu Madrasah Ibtidaiyah Darul Falah - Phase 9 Operations, Security, Audit Logging, Backup Strategy & User Portals",
+  "description": "Sistem Informasi Terpadu Madrasah Ibtidaiyah Darul Falah - Phase 10 Production Readiness, Nginx, PHP-FPM, MySQL, HTTPS, Backup & Deployment Guide",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
