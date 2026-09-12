@@ -151,6 +151,13 @@ export default function App() {
     { id: 4, classroom: "Kelas 4A", student: "Rian Hidayat", subject: "Ilmu Pengetahuan Alam", semester: "Ganjil", type: "Praktik", score: 90.0, teacher: "Budi Santoso, S.Pd", notes: "Eksperimen sains bagus" }
   ];
 
+  // Phase 6 Mock Data for Rapor (Report Cards)
+  const reportCardsData = [
+    { id: 1, classroom: "Kelas 6A", student: "Ahmad Zaki Al-Faruq", nisn: "0012345688", academicYear: "2026/2027", semester: "Ganjil", hadir: 110, izin: 2, sakit: 1, alpa: 0, status: "Published", promotion: "Naik Kelas", notes: "Prestasi sangat baik, pertahankan kedisiplinan dan hafalan Al-Qur'annya!" },
+    { id: 2, classroom: "Kelas 5B", student: "Siti Fatimah", nisn: "0012345689", academicYear: "2026/2027", semester: "Ganjil", hadir: 108, izin: 4, sakit: 1, alpa: 0, status: "Published", promotion: "Naik Kelas", notes: "Sangat rajin dalam kegiatan keagamaan dan ekstrakurikuler." },
+    { id: 3, classroom: "Kelas 4A", student: "Rian Hidayat", nisn: "0012345690", academicYear: "2026/2027", semester: "Ganjil", hadir: 105, izin: 3, sakit: 3, alpa: 1, status: "Published", promotion: "Belum Ditentukan", notes: "Perlu bimbingan lebih giat dalam mata pelajaran matematika." }
+  ];
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800 flex flex-col font-sans">
       
@@ -209,6 +216,7 @@ export default function App() {
             <button onClick={() => setCurrentNav('achievements')} className={`px-3 py-2 rounded-lg transition ${currentNav === 'achievements' ? 'text-emerald-700 bg-emerald-50 font-semibold' : 'hover:text-emerald-600'}`}>Prestasi</button>
             <button onClick={() => setCurrentNav('attendances')} className={`px-3 py-2 rounded-lg transition ${currentNav === 'attendances' ? 'text-emerald-700 bg-emerald-50 font-semibold' : 'hover:text-emerald-600'}`}>Absensi</button>
             <button onClick={() => setCurrentNav('grades')} className={`px-3 py-2 rounded-lg transition ${currentNav === 'grades' ? 'text-emerald-700 bg-emerald-50 font-semibold' : 'hover:text-emerald-600'}`}>Nilai</button>
+            <button onClick={() => setCurrentNav('rapor')} className={`px-3 py-2 rounded-lg transition ${currentNav === 'rapor' ? 'text-emerald-700 bg-emerald-50 font-semibold' : 'hover:text-emerald-600'}`}>Rapor</button>
             <button onClick={() => setCurrentNav('contact')} className={`px-3 py-2 rounded-lg transition ${currentNav === 'contact' ? 'text-emerald-700 bg-emerald-50 font-semibold' : 'hover:text-emerald-600'}`}>Kontak</button>
           </nav>
 
@@ -234,6 +242,7 @@ export default function App() {
             <button onClick={() => { setCurrentNav('achievements'); setMobileMenuOpen(false); }} className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">Prestasi Madrasah</button>
             <button onClick={() => { setCurrentNav('attendances'); setMobileMenuOpen(false); }} className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">Kehadiran / Absensi</button>
             <button onClick={() => { setCurrentNav('grades'); setMobileMenuOpen(false); }} className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">Nilai Siswa</button>
+            <button onClick={() => { setCurrentNav('rapor'); setMobileMenuOpen(false); }} className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">Rapor Hasil Belajar</button>
             <button onClick={() => { setCurrentNav('contact'); setMobileMenuOpen(false); }} className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">Kontak Kami</button>
           </div>
         )}
@@ -765,6 +774,69 @@ export default function App() {
                         <td className="p-4 font-mono font-bold text-emerald-700 text-base">{grade.score}</td>
                         <td className="p-4 text-slate-600 text-xs">{grade.teacher}</td>
                         <td className="p-4 text-slate-500 text-xs italic">{grade.notes}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* RAPOR VIEW */}
+        {currentNav === 'rapor' && (
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-10">
+            <div className="text-center max-w-2xl mx-auto space-y-2">
+              <span className="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full">Phase 6 Modul</span>
+              <h2 className="text-3xl font-extrabold text-slate-900">Rapor Hasil Belajar Siswa (E-Rapor)</h2>
+              <p className="text-slate-600 text-sm">Rekapitulasi nilai rapor per semester, rekap kehadiran, catatan wali kelas, dan status kenaikan kelas.</p>
+            </div>
+
+            <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+              <div className="p-6 border-b border-slate-100 flex justify-between items-center">
+                <h3 className="font-bold text-slate-900">Daftar Rapor Digital Siswa</h3>
+                <span className="text-xs bg-emerald-50 text-emerald-700 px-3 py-1 rounded-lg font-semibold">Tahun Ajaran 2026/2027</span>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full text-left border-collapse text-sm">
+                  <thead>
+                    <tr className="bg-slate-50 border-b border-slate-200 text-slate-600 text-xs uppercase tracking-wider">
+                      <th className="p-4">Kelas</th>
+                      <th className="p-4">Nama Siswa</th>
+                      <th className="p-4">NISN</th>
+                      <th className="p-4">Semester</th>
+                      <th className="p-4">Kehadiran (H/I/S/A)</th>
+                      <th className="p-4">Status Rapor</th>
+                      <th className="p-4">Kenaikan/Kelulusan</th>
+                      <th className="p-4">Catatan Wali Kelas</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100">
+                    {reportCardsData.map((rc) => (
+                      <tr key={rc.id} className="hover:bg-slate-50 transition">
+                        <td className="p-4 font-semibold text-slate-900">{rc.classroom}</td>
+                        <td className="p-4 font-bold text-slate-900">{rc.student}</td>
+                        <td className="p-4 text-slate-500 font-mono text-xs">{rc.nisn}</td>
+                        <td className="p-4 text-slate-700 font-medium">{rc.semester}</td>
+                        <td className="p-4 font-mono text-xs text-slate-700">
+                          <span className="text-emerald-700 font-bold">{rc.hadir}H</span> / 
+                          <span className="text-blue-600">{rc.izin}I</span> / 
+                          <span className="text-amber-600">{rc.sakit}S</span> / 
+                          <span className="text-rose-600">{rc.alpa}A</span>
+                        </td>
+                        <td className="p-4">
+                          <span className="bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-md text-xs font-bold">
+                            {rc.status}
+                          </span>
+                        </td>
+                        <td className="p-4">
+                          <span className={`px-2.5 py-1 rounded-md text-xs font-bold ${
+                            rc.promotion === 'Naik Kelas' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-amber-50 text-amber-700 border border-amber-200'
+                          }`}>
+                            {rc.promotion}
+                          </span>
+                        </td>
+                        <td className="p-4 text-slate-600 text-xs italic">{rc.notes}</td>
                       </tr>
                     ))}
                   </tbody>

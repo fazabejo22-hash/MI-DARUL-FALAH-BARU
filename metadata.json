@@ -1,6 +1,6 @@
 {
   "name": "Remix Sistem Informasi Terpadu MI Darul Falah",
-  "description": "Sistem Informasi Terpadu Madrasah Ibtidaiyah Darul Falah - Phase 5 Absensi, Nilai, Akademik & Admin Dashboard",
+  "description": "Sistem Informasi Terpadu Madrasah Ibtidaiyah Darul Falah - Phase 6 Rapor Hasil Belajar, Absensi, Nilai & Admin Dashboard",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
