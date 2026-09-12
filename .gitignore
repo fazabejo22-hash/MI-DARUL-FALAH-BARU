@@ -6,3 +6,8 @@ coverage/
 *.log
 .env*
 !.env.example
+
+/vendor/
+/storage/framework/testing/
+/public/css/filament/
+/public/js/filament/
