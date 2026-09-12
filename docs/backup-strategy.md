@@ -11,6 +11,7 @@ Dokumen ini mendefinisikan prosedur dan kebijakan backup operasional untuk Siste
 - **Backup Full Storage Mingguan (Weekly Full Backup)**: Dijalankan setiap hari Minggu pukul 02:00 WIB untuk arsip dokumen dan storage publik. Retensi penyimpanan: 90 hari.
 
 ## 3. Skrip Backup Otomatis Database (MySQL / MariaDB)
+> Catatan: cron tidak otomatis membaca file `.env` Laravel. Pastikan variabel `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`, dan `DB_HOST` tersedia melalui environment service/cron yang aman atau file konfigurasi backup dengan permission terbatas.
 ```bash
 #!/bin/bash
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
