@@ -5,7 +5,7 @@ Dokumen ini adalah panduan resmi untuk melakukan deployment Sistem Informasi Ter
 ## 1. Spesifikasi Stack Produksi
 - **OS**: Ubuntu 22.04 / 24.04 LTS
 - **Web Server**: Nginx
-- **PHP**: PHP 8.2+ dengan ekstensi (`bcmath`, `ctype`, `fileinfo`, `json`, `mbstring`, `openssl`, `pdo`, `pdo_mysql`, `tokenizer`, `xml`, `gd`, `zip`)
+- **PHP**: PHP 8.2+ dengan ekstensi (`bcmath`, `ctype`, `fileinfo`, `intl`, `json`, `mbstring`, `openssl`, `pdo`, `pdo_mysql`, `tokenizer`, `xml`, `gd`, `zip`)
 - **Database**: MySQL 8.0+ / MariaDB 10.6+
 - **Process Manager**: Supervisor (untuk queue worker / scheduler jika diperlukan)
 
@@ -72,6 +72,7 @@ APP_NAME="MI Darul Falah"
 APP_ENV=production
 APP_KEY=base64:GENERATE_UNIQUE_KEY_VIA_ARTISAN
 APP_DEBUG=false
+APP_TIMEZONE=Asia/Jakarta
 APP_URL=https://portal.midarulfalah.sch.id
 
 LOG_CHANNEL=stack
@@ -85,8 +86,8 @@ DB_DATABASE=midarulfalah_prod
 DB_USERNAME=db_user_secure
 DB_PASSWORD=strong_database_password_here
 
-BROADCAST_DRIVER=log
-CACHE_DRIVER=file
+BROADCAST_CONNECTION=log
+CACHE_STORE=file
 FILESYSTEM_DISK=public
 QUEUE_CONNECTION=sync
 SESSION_DRIVER=file
