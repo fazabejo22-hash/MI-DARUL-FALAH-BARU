@@ -21,6 +21,12 @@ class UserPortalTest extends TestCase
         $this->seed(RolePermissionSeeder::class);
     }
 
+    public function test_guest_cannot_access_portal(): void
+    {
+        $response = $this->get('/portal');
+        $response->assertRedirect('/admin/login');
+    }
+
     public function test_parent_can_have_multiple_children(): void
     {
         $parentUser = User::create([
@@ -29,7 +35,7 @@ class UserPortalTest extends TestCase
             'password' => bcrypt('password'),
             'is_active' => true,
         ]);
-        $parentUser->assignRole('Orang Tua');
+        $parentUser->assignRole('Orang Tua/Wali');
 
         $student1 = Student::create([
             'nisn' => '0012345601',
@@ -47,7 +53,6 @@ class UserPortalTest extends TestCase
             'status' => 'Aktif',
         ]);
 
-        // Attach both children to parent
         $parentUser->children()->attach([$student1->id, $student2->id]);
 
         $this->assertCount(2, $parentUser->children);
@@ -55,26 +60,58 @@ class UserPortalTest extends TestCase
         $this->assertTrue($parentUser->children->contains($student2));
     }
 
-    public function test_student_portal_scoping(): void
+    public function test_parent_cannot_access_unlinked_child_idor(): void
     {
-        $studentUser = User::create([
-            'name' => 'Siswa Zaki',
-            'email' => 'zaki@student.com',
+        $parentA = User::create([
+            'name' => 'Parent A',
+            'email' => 'parenta@test.com',
             'password' => bcrypt('password'),
             'is_active' => true,
         ]);
-        $studentUser->assignRole('Siswa');
+        $parentA->assignRole('Orang Tua/Wali');
 
-        $student = Student::create([
-            'nisn' => '0012345688',
-            'nis' => '1010',
-            'name' => 'Ahmad Zaki Al-Faruq',
+        $studentB = Student::create([
+            'nisn' => '9999999999',
+            'nis' => '9999',
+            'name' => 'Student B',
             'gender' => 'L',
             'status' => 'Aktif',
-            'user_id' => $studentUser->id,
         ]);
 
-        $this->assertEquals($studentUser->id, $student->user->id);
-        $this->assertEquals($student->id, $studentUser->student->id);
+        $this->actingAs($parentA);
+        $response = $this->get(route('portal.student.detail', $studentB->id));
+        $response->assertStatus(403);
+    }
+
+    public function test_student_cannot_access_other_student_idor(): void
+    {
+        $studentUserA = User::create([
+            'name' => 'Student A',
+            'email' => 'studenta@test.com',
+            'password' => bcrypt('password'),
+            'is_active' => true,
+        ]);
+        $studentUserA->assignRole('Siswa');
+
+        $studentA = Student::create([
+            'nisn' => '1111111111',
+            'nis' => '1111',
+            'name' => 'Anak A',
+            'gender' => 'L',
+            'status' => 'Aktif',
+            'user_id' => $studentUserA->id,
+        ]);
+
+        $studentB = Student::create([
+            'nisn' => '2222222222',
+            'nis' => '2222',
+            'name' => 'Anak B',
+            'gender' => 'P',
+            'status' => 'Aktif',
+        ]);
+
+        $this->actingAs($studentUserA);
+        $response = $this->get(route('portal.student.detail', $studentB->id));
+        $response->assertStatus(403);
     }
 }
