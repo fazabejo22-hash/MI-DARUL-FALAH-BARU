@@ -18,6 +18,7 @@ use App\Models\SchoolProfile;
 use App\Filament\Resources\EventResource\Pages\ManageEvents;
 use App\Filament\Resources\DocumentResource\Pages\ManageDocuments;
 use App\Filament\Resources\PageResource;
+use App\Filament\Resources\PageResource\Pages\ManagePages;
 use Database\Seeders\RolePermissionSeeder;
 use Database\Seeders\SchoolProfileSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -299,6 +300,7 @@ class CmsTest extends TestCase
         $inactive->assignRole('Super Admin');
 
         // Kepala Madrasah can view any, but cannot create (canCreate returns false for Kepala Madrasah)
+        $this->actingAs($kepala);
         $this->assertTrue(PageResource::canViewAny());
         $this->assertFalse(PageResource::canCreate());
 
