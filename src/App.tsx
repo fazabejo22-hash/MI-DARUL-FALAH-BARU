@@ -158,6 +158,13 @@ export default function App() {
     { id: 3, classroom: "Kelas 4A", student: "Rian Hidayat", nisn: "0012345690", academicYear: "2026/2027", semester: "Ganjil", hadir: 105, izin: 3, sakit: 3, alpa: 1, status: "Published", promotion: "Belum Ditentukan", notes: "Perlu bimbingan lebih giat dalam mata pelajaran matematika." }
   ];
 
+  // Phase 7 Mock Data for PPDB (New Student Admission)
+  const ppdbRegistrantsData = [
+    { id: 1, regNum: "PPDB-2026-0001", name: "Fatimah Az-Zahra", gender: "P", school: "RA Al-Hikmah Krian", period: "Gelombang 1", status: "Accepted", date: "2026-10-02" },
+    { id: 2, regNum: "PPDB-2026-0002", name: "Muhammad Umar", gender: "L", school: "TK Dharma Wanita", period: "Gelombang 1", status: "Verified", date: "2026-10-03" },
+    { id: 3, regNum: "PPDB-2026-0003", name: "Aisyah Nur", gender: "P", school: "RA Muslimat NU", period: "Gelombang 1", status: "Pending", date: "2026-10-04" }
+  ];
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800 flex flex-col font-sans">
       
@@ -217,6 +224,7 @@ export default function App() {
             <button onClick={() => setCurrentNav('attendances')} className={`px-3 py-2 rounded-lg transition ${currentNav === 'attendances' ? 'text-emerald-700 bg-emerald-50 font-semibold' : 'hover:text-emerald-600'}`}>Absensi</button>
             <button onClick={() => setCurrentNav('grades')} className={`px-3 py-2 rounded-lg transition ${currentNav === 'grades' ? 'text-emerald-700 bg-emerald-50 font-semibold' : 'hover:text-emerald-600'}`}>Nilai</button>
             <button onClick={() => setCurrentNav('rapor')} className={`px-3 py-2 rounded-lg transition ${currentNav === 'rapor' ? 'text-emerald-700 bg-emerald-50 font-semibold' : 'hover:text-emerald-600'}`}>Rapor</button>
+            <button onClick={() => setCurrentNav('ppdb')} className={`px-3 py-2 rounded-lg transition ${currentNav === 'ppdb' ? 'text-emerald-700 bg-emerald-50 font-semibold' : 'hover:text-emerald-600'}`}>PPDB</button>
             <button onClick={() => setCurrentNav('contact')} className={`px-3 py-2 rounded-lg transition ${currentNav === 'contact' ? 'text-emerald-700 bg-emerald-50 font-semibold' : 'hover:text-emerald-600'}`}>Kontak</button>
           </nav>
 
@@ -243,6 +251,7 @@ export default function App() {
             <button onClick={() => { setCurrentNav('attendances'); setMobileMenuOpen(false); }} className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">Kehadiran / Absensi</button>
             <button onClick={() => { setCurrentNav('grades'); setMobileMenuOpen(false); }} className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">Nilai Siswa</button>
             <button onClick={() => { setCurrentNav('rapor'); setMobileMenuOpen(false); }} className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">Rapor Hasil Belajar</button>
+            <button onClick={() => { setCurrentNav('ppdb'); setMobileMenuOpen(false); }} className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">PPDB online</button>
             <button onClick={() => { setCurrentNav('contact'); setMobileMenuOpen(false); }} className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">Kontak Kami</button>
           </div>
         )}
@@ -837,6 +846,80 @@ export default function App() {
                           </span>
                         </td>
                         <td className="p-4 text-slate-600 text-xs italic">{rc.notes}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* PPDB VIEW */}
+        {currentNav === 'ppdb' && (
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-10">
+            <div className="text-center max-w-2xl mx-auto space-y-2">
+              <span className="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full">Phase 7 Modul</span>
+              <h2 className="text-3xl font-extrabold text-slate-900">PPDB Online (Penerimaan Peserta Didik Baru)</h2>
+              <p className="text-slate-600 text-sm">Informasi gelombang pendaftaran, rekapitulasi data pendaftar calon siswa baru, dan verifikasi berkas.</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-2">
+                <span className="text-xs text-slate-500 font-semibold uppercase tracking-wider">Gelombang Aktif</span>
+                <h3 className="text-lg font-bold text-slate-900">Gelombang 1 (2026/2027)</h3>
+                <p className="text-xs text-slate-600">01 Oktober 2026 - 31 Desember 2026</p>
+                <div className="pt-2">
+                  <span className="bg-emerald-50 text-emerald-700 text-xs font-bold px-3 py-1 rounded-md">Kuota: 150 Siswa</span>
+                </div>
+              </div>
+              <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-2">
+                <span className="text-xs text-slate-500 font-semibold uppercase tracking-wider">Total Pendaftar</span>
+                <p className="text-3xl font-extrabold text-emerald-700 mt-1">3 Siswa</p>
+                <p className="text-xs text-slate-500">Terverifikasi sistem database</p>
+              </div>
+              <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-2">
+                <span className="text-xs text-slate-500 font-semibold uppercase tracking-wider">Status Pendaftaran</span>
+                <p className="text-3xl font-extrabold text-blue-600 mt-1">BUKA</p>
+                <p className="text-xs text-slate-500">Pendaftaran online & offline tersedia</p>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+              <div className="p-6 border-b border-slate-100 flex justify-between items-center">
+                <h3 className="font-bold text-slate-900">Daftar Calon Siswa Baru (PPDB)</h3>
+                <span className="text-xs bg-slate-100 px-3 py-1 rounded-lg text-slate-600 font-medium">Live Database Sync</span>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full text-left border-collapse text-sm">
+                  <thead>
+                    <tr className="bg-slate-50 border-b border-slate-200 text-slate-600 text-xs uppercase tracking-wider">
+                      <th className="p-4">No. Pendaftaran</th>
+                      <th className="p-4">Nama Calon Siswa</th>
+                      <th className="p-4">L/P</th>
+                      <th className="p-4">Asal Sekolah (TK/RA)</th>
+                      <th className="p-4">Gelombang</th>
+                      <th className="p-4">Status</th>
+                      <th className="p-4">Tanggal Daftar</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100">
+                    {ppdbRegistrantsData.map((reg) => (
+                      <tr key={reg.id} className="hover:bg-slate-50 transition">
+                        <td className="p-4 font-mono font-bold text-emerald-700 text-xs">{reg.regNum}</td>
+                        <td className="p-4 font-bold text-slate-900">{reg.name}</td>
+                        <td className="p-4 text-slate-700 font-medium">{reg.gender}</td>
+                        <td className="p-4 text-slate-600">{reg.school}</td>
+                        <td className="p-4 text-slate-700">{reg.period}</td>
+                        <td className="p-4">
+                          <span className={`px-2.5 py-1 rounded-md text-xs font-bold ${
+                            reg.status === 'Accepted' ? 'bg-emerald-100 text-emerald-800' :
+                            reg.status === 'Verified' ? 'bg-blue-100 text-blue-800' : 'bg-amber-100 text-amber-800'
+                          }`}>
+                            {reg.status}
+                          </span>
+                        </td>
+                        <td className="p-4 text-slate-500 font-mono text-xs">{reg.date}</td>
                       </tr>
                     ))}
                   </tbody>
