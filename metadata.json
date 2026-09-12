@@ -1,6 +1,6 @@
 {
   "name": "Remix Sistem Informasi Terpadu MI Darul Falah",
-  "description": "Sistem Informasi Terpadu Madrasah Ibtidaiyah Darul Falah - Phase 8 Portal Pengguna (Guru, Wali Kelas, Siswa, Orang Tua), PPDB, Rapor & Admin Dashboard",
+  "description": "Sistem Informasi Terpadu Madrasah Ibtidaiyah Darul Falah - Phase 9 Operations, Security, Audit Logging, Backup Strategy & User Portals",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
