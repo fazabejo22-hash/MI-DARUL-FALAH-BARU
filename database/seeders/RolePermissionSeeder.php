@@ -44,17 +44,37 @@ class RolePermissionSeeder extends Seeder
             Permission::firstOrCreate(['name' => $permission, 'guard_name' => 'web']);
         }
 
-        // Assign all permissions to Super Admin
-        $superAdmin = Role::findByName('Super Admin');
-        $superAdmin->givePermissionTo(Permission::all());
+        // Assign permissions by role using least privilege.
+        Role::findByName('Super Admin')->syncPermissions(Permission::all());
 
-        // Assign CMS permissions to Admin/TU
-        $adminTu = Role::findByName('Admin/TU');
-        $adminTu->givePermissionTo([
+        Role::findByName('Admin/TU')->syncPermissions([
             'manage-school-profile',
             'manage-website',
             'manage-academic',
             'view-reports',
+        ]);
+
+        Role::findByName('Kepala Madrasah')->syncPermissions([
+            'view-reports',
+        ]);
+
+        Role::findByName('Guru')->syncPermissions([
+            'input-grades',
+            'input-attendance',
+        ]);
+
+        Role::findByName('Wali Kelas')->syncPermissions([
+            'input-grades',
+            'input-attendance',
+            'view-reports',
+        ]);
+
+        Role::findByName('Siswa')->syncPermissions([
+            'view-own-grades',
+        ]);
+
+        Role::findByName('Orang Tua/Wali')->syncPermissions([
+            'view-own-grades',
         ]);
     }
 }
