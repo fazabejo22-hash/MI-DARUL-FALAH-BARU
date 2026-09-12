@@ -51,4 +51,19 @@ class User extends Authenticatable implements FilamentUser
             'Wali Kelas',
         ]);
     }
+
+    public function teacher()
+    {
+        return $this->hasOne(Teacher::class);
+    }
+
+    public function student()
+    {
+        return $this->hasOne(Student::class);
+    }
+
+    public function children(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Student::class, 'parent_student', 'user_id', 'student_id')->withTimestamps();
+    }
 }

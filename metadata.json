@@ -1,6 +1,6 @@
 {
   "name": "Remix Sistem Informasi Terpadu MI Darul Falah",
-  "description": "Sistem Informasi Terpadu Madrasah Ibtidaiyah Darul Falah - Phase 7 PPDB (Penerimaan Peserta Didik Baru), Rapor, Absensi & Admin Dashboard",
+  "description": "Sistem Informasi Terpadu Madrasah Ibtidaiyah Darul Falah - Phase 8 Portal Pengguna (Guru, Wali Kelas, Siswa, Orang Tua), PPDB, Rapor & Admin Dashboard",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"

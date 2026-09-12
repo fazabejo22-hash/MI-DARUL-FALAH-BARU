@@ -22,4 +22,14 @@ class Student extends Model
             ->withPivot(['academic_year_id', 'status'])
             ->withTimestamps();
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function parents(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'parent_student', 'student_id', 'user_id')->withTimestamps();
+    }
 }
